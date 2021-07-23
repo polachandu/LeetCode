@@ -4,6 +4,7 @@ import java.util.Set;
 public class HappyNumber {
 	
 public static boolean isHappy(int n) {
+	
 	        int a=0;    
 		String s = Integer.toString(n);
 		for(int i=0;i<s.length();i++) {
@@ -33,7 +34,8 @@ public static boolean isHappy(int n) {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		System.out.println(isHappy(19));
-//		System.out.println(isHappy(7));
+		System.out.println(isHappy(7));
+		System.out.println(isHappy(20));
 		
 	}
 	
