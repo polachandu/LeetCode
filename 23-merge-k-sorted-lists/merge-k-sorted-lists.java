@@ -15,7 +15,6 @@ class Solution {
             if (node != null)
                 minHeap.offer(node);
         }
-
         ListNode dummy = new ListNode(0);
         ListNode current = dummy;
         while (!minHeap.isEmpty()) {
