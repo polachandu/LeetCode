@@ -19,11 +19,9 @@ class Solution {
                     }
                     j++;
                     k--;
-                }
-                if (sum < 0) {
+                } else if (sum < 0) {
                     j++;
-                }
-                if (sum > 0) {
+                } else {
                     k--;
                 }
 
