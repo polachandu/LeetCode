@@ -1,10 +1,16 @@
 class Solution {
     public int[] countBits(int n) {
-        int[] result = new int[n+1];
-        result[0] = 0;
-        for(int i=1;i<result.length;i++){
-            result[i] = result[i>>>1]+(i&1);
+        int[] arr = new int[n + 1];
+        arr[0] = 0;
+        for (int i = 1; i <= n; i++) {
+            int count = 0;
+            int j = i;
+            while (j != 0) {
+                count += j & 1;
+                j = j >>> 1;
+            }
+            arr[i] = count;
         }
-        return result;
+        return arr;
     }
 }
