@@ -1,18 +1,17 @@
 class Solution {
     public boolean canFinish(int numCourses, int[][] prerequisites) {
-        List<List<Integer>> graph = new ArrayList();
         int[] indegree = new int[numCourses];
-
+        List<List<Integer>> graph = new ArrayList();
         for (int i = 0; i < numCourses; i++) {
             graph.add(new ArrayList());
         }
-
         for (int[] pre : prerequisites) {
-            graph.get(pre[1]).add(pre[0]);
             indegree[pre[0]]++;
+            graph.get(pre[1]).add(pre[0]);
         }
 
         Queue<Integer> queue = new LinkedList();
+
         for (int i = 0; i < numCourses; i++) {
             if (indegree[i] == 0) {
                 queue.add(i);
@@ -29,6 +28,6 @@ class Solution {
                 }
             }
         }
-        return numCourses == count;
+        return count == numCourses;
     }
 }
