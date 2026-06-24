@@ -21,22 +21,21 @@ class Node {
 class Solution {
     public Node cloneGraph(Node node) {
         if (node == null)
-            return node;
+            return null;
+        HashMap<Node, Node> map = new HashMap();
         Queue<Node> queue = new LinkedList();
-        HashMap<Node, Node> visited = new HashMap();
+        map.put(node, new Node(node.val));
         queue.add(node);
-        visited.put(node, new Node(node.val));
         while (!queue.isEmpty()) {
             Node curr = queue.poll();
             for (Node nei : curr.neighbors) {
-                if (!visited.containsKey(nei)) {
-                    Node neiNode = new Node(nei.val);
+                if (!map.containsKey(nei)) {
                     queue.add(nei);
-                    visited.put(nei, neiNode);
+                    map.put(nei, new Node(nei.val));
                 }
-                visited.get(curr).neighbors.add(visited.get(nei));
+                map.get(curr).neighbors.add(map.get(nei));
             }
         }
-        return visited.get(node);
+        return map.get(node);
     }
 }
