@@ -1,11 +1,10 @@
 class Solution {
     public List<List<Integer>> pacificAtlantic(int[][] heights) {
-        List<List<Integer>> results = new ArrayList();
         int m = heights.length, n = heights[0].length;
-        boolean[][] pacific = new boolean[m][n];
-        boolean[][] atlantic = new boolean[m][n];
         Queue<int[]> pacQueue = new LinkedList();
         Queue<int[]> atlQueue = new LinkedList();
+        boolean[][] pacific = new boolean[m][n];
+        boolean[][] atlantic = new boolean[m][n];
 
         for (int i = 0; i < m; i++) {
             pacific[i][0] = true;
@@ -13,19 +12,22 @@ class Solution {
             atlantic[i][n - 1] = true;
             atlQueue.add(new int[] { i, n - 1 });
         }
-        for (int j = 0; j < n; j++) {
-            pacific[0][j] = true;
-            pacQueue.add(new int[] { 0, j });
-            atlantic[m - 1][j] = true;
-            atlQueue.add(new int[] { m - 1, j });
+
+        for (int i = 0; i < n; i++) {
+            pacific[0][i] = true;
+            pacQueue.add(new int[] { 0, i });
+            atlantic[m - 1][i] = true;
+            atlQueue.add(new int[] { m - 1, i });
         }
 
         bfs(heights, pacQueue, pacific);
         bfs(heights, atlQueue, atlantic);
 
+        List<List<Integer>> results = new ArrayList();
+
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
-                if (atlantic[i][j] && pacific[i][j]) {
+                if (pacific[i][j] && atlantic[i][j]) {
                     results.add(List.of(i, j));
                 }
             }
@@ -34,7 +36,7 @@ class Solution {
     }
 
     private void bfs(int[][] heights, Queue<int[]> queue, boolean[][] visited) {
-        int[][] dirs = { { 1, 0 }, { -1, 0 }, { 0, 1 }, { 0, -1 } };
+        int[][] dirs = { { 0, 1 }, { 1, 0 }, { 0, -1 }, { -1, 0 } };
         while (!queue.isEmpty()) {
             int[] curr = queue.poll();
             for (int[] dir : dirs) {
