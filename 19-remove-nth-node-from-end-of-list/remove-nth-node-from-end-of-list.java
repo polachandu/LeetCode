@@ -30,9 +30,9 @@ class Solution {
         if (current.next != null) {
             current.next = current.next.next;
         }
-        while (current != null) {
-            current = current.next;
-        }
+        // while (current != null) {
+        //     current = current.next;
+        // }
         return head;
     }
 }
