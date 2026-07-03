@@ -1,7 +1,8 @@
 class Solution {
     public int countSubstrings(String s) {
-        if (s.length() == 1)
+        if (s.length() == 1) {
             return 1;
+        }
         int count1 = 0, count2 = 0;
         for (int i = 0; i < s.length(); i++) {
             count1 += expand(s, i, i);
@@ -10,12 +11,12 @@ class Solution {
         return count1 + count2;
     }
 
-    private int expand(String s, int left, int right) {
+    private int expand(String s, int start, int end) {
         int intCount = 0;
-        while (left >= 0 && right < s.length() && s.charAt(left) == s.charAt(right)) {
+        while (start >= 0 && end < s.length() && s.charAt(start) == s.charAt(end)) {
+            start--;
+            end++;
             intCount++;
-            left--;
-            right++;
         }
         return intCount;
     }
