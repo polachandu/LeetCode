@@ -23,20 +23,19 @@ class Solution {
 
     private void dfs(char[][] board, int row, int col, TrieNode current, List<String> results) {
 
-        if (current.prefix != null) {
-            results.add(current.prefix);
-            current.prefix = null;
-        }
         if (row < 0 || col < 0 || row >= board.length || col >= board[0].length) {
             return;
         }
         if (board[row][col] == '\0') {
             return;
         }
-
         TrieNode node = current.children[board[row][col] - 'a'];
         if (node == null)
             return;
+        if (node.prefix != null) {
+            results.add(node.prefix);
+            node.prefix = null;
+        }
 
         char temp = board[row][col];
         board[row][col] = '\0';
