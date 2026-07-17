@@ -1,4 +1,5 @@
 class MedianFinder {
+
     PriorityQueue<Integer> minHeap;
     PriorityQueue<Integer> maxHeap;
 
@@ -18,6 +19,7 @@ class MedianFinder {
         if (minHeap.size() > maxHeap.size()) {
             maxHeap.offer(minHeap.poll());
         }
+
     }
 
     public double findMedian() {
