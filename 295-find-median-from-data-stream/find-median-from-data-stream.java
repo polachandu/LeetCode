@@ -10,16 +10,16 @@ class MedianFinder {
 
     public void addNum(int num) {
         maxHeap.offer(num);
-        if (!minHeap.isEmpty() && maxHeap.peek() > minHeap.peek()) {
+        if(!minHeap.isEmpty() && maxHeap.peek() > minHeap.peek()){
             minHeap.offer(maxHeap.poll());
         }
-        if (maxHeap.size() > minHeap.size() + 1) {
+        if(maxHeap.size() > minHeap.size()+1){
             minHeap.offer(maxHeap.poll());
         }
-        if (minHeap.size() > maxHeap.size()) {
+        if(minHeap.size() > maxHeap.size()){
             maxHeap.offer(minHeap.poll());
         }
-
+        
     }
 
     public double findMedian() {
