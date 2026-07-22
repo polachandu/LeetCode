@@ -2,7 +2,7 @@ class Solution {
 
     class TrieNode {
         TrieNode[] children = new TrieNode[26];
-        String prefix = null;
+        String word = null;
     }
 
     TrieNode root = new TrieNode();
@@ -21,29 +21,33 @@ class Solution {
         return results;
     }
 
-    private void dfs(char[][] board, int row, int col, TrieNode current, List<String> results) {
+    private void dfs(char[][] board, int row, int col, TrieNode current, List<String> results){
+        if(current.word != null){
+            results.add(current.word);
+            current.word = null;
+        }
+        if(row <0 || col < 0 || row >=board.length || col >= board[0].length){
+            return;
+        }
+        if(board[row][col] == '\0'){
+            return;
+        }
 
-        if (row < 0 || col < 0 || row >= board.length || col >= board[0].length) {
+        TrieNode node = current.children[board[row][col]-'a'];
+        if(node == null){
             return;
-        }
-        if (board[row][col] == '\0') {
-            return;
-        }
-        TrieNode node = current.children[board[row][col] - 'a'];
-        if (node == null)
-            return;
-        if (node.prefix != null) {
-            results.add(node.prefix);
-            node.prefix = null;
         }
 
         char temp = board[row][col];
         board[row][col] = '\0';
-        dfs(board, row + 1, col, node, results);
-        dfs(board, row - 1, col, node, results);
-        dfs(board, row, col + 1, node, results);
-        dfs(board, row, col - 1, node, results);
+
+        dfs(board, row+1, col, node, results);
+        dfs(board, row-1, col, node, results);
+        dfs(board, row, col+1, node, results);
+        dfs(board, row, col-1, node, results);
+
         board[row][col] = temp;
+
     }
 
     private void insert(String word) {
@@ -51,10 +55,9 @@ class Solution {
         for (char ch : word.toCharArray()) {
             if (current.children[ch - 'a'] == null) {
                 current.children[ch - 'a'] = new TrieNode();
-
             }
             current = current.children[ch - 'a'];
         }
-        current.prefix = word;
+        current.word = word;
     }
 }
