@@ -21,30 +21,32 @@ class Solution {
         return results;
     }
 
-    private void dfs(char[][] board, int row, int col, TrieNode current, List<String> results){
-        if(current.word != null){
-            results.add(current.word);
-            current.word = null;
-        }
-        if(row <0 || col < 0 || row >=board.length || col >= board[0].length){
+    private void dfs(char[][] board, int row, int col, TrieNode current, List<String> results) {
+
+        if (row < 0 || col < 0 || row >= board.length || col >= board[0].length) {
             return;
         }
-        if(board[row][col] == '\0'){
+        if (board[row][col] == '\0') {
             return;
         }
 
-        TrieNode node = current.children[board[row][col]-'a'];
-        if(node == null){
+        TrieNode node = current.children[board[row][col] - 'a'];
+        if (node == null) {
             return;
+        }
+
+        if (node.word != null) {
+            results.add(node.word);
+            node.word = null;
         }
 
         char temp = board[row][col];
         board[row][col] = '\0';
 
-        dfs(board, row+1, col, node, results);
-        dfs(board, row-1, col, node, results);
-        dfs(board, row, col+1, node, results);
-        dfs(board, row, col-1, node, results);
+        dfs(board, row + 1, col, node, results);
+        dfs(board, row - 1, col, node, results);
+        dfs(board, row, col + 1, node, results);
+        dfs(board, row, col - 1, node, results);
 
         board[row][col] = temp;
 
