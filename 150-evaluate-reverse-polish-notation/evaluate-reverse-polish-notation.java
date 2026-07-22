@@ -17,6 +17,6 @@ class Solution {
                 st.push(Integer.parseInt(tokens[i]));
             }
         }
-        return st.pop();
+        return st.peek();
     }
 }
