@@ -25,13 +25,13 @@ class Solution {
         HashMap<Node, Node> map = new HashMap();
         Queue<Node> queue = new LinkedList();
         map.put(node, new Node(node.val));
-        queue.add(node);
+        queue.offer(node);
         while (!queue.isEmpty()) {
             Node curr = queue.poll();
             for (Node nei : curr.neighbors) {
                 if (!map.containsKey(nei)) {
-                    queue.add(nei);
                     map.put(nei, new Node(nei.val));
+                    queue.add(nei);
                 }
                 map.get(curr).neighbors.add(map.get(nei));
             }
