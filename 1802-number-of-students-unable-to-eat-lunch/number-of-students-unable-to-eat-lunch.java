@@ -1,24 +1,24 @@
 class Solution {
     public int countStudents(int[] students, int[] sandwiches) {
-        Deque<Integer> deque = new ArrayDeque();
+        Queue<Integer> queue = new LinkedList();
         for (int i = 0; i < students.length; i++) {
-            deque.offerLast(students[i]);
+            queue.offer(students[i]);
         }
         int count = 0;
         int idx = 0;
-        while (!deque.isEmpty()) {
-            if (deque.peekFirst() == sandwiches[idx]) {
-                deque.pollFirst();
+        while (!queue.isEmpty()) {
+            if (queue.peek() == sandwiches[idx]) {
+                queue.poll();
                 idx++;
                 count = 0;
             } else {
-                deque.offerLast(deque.pollFirst());
+                queue.offer(queue.poll());
                 count++;
             }
-            if (count == deque.size()) {
+            if (count == queue.size()) {
                 return count;
             }
         }
-        return deque.size();
+        return queue.size();
     }
 }
