@@ -1,15 +1,13 @@
 class Solution {
     public String longestPalindrome(String s) {
-        if (s.length() == 1) {
+        int start = 0;
+        int maxLen = 0;
+        if (s.length() == 1)
             return s;
-        }
-
-        int len = s.length();
-        int maxLen = 0, start = 0;
         for (int i = 0; i < s.length(); i++) {
             int len1 = expand(s, i, i);
             int len2 = expand(s, i, i + 1);
-            len = Math.max(len1, len2);
+            int len = Math.max(len1, len2);
             if (len > maxLen) {
                 maxLen = len;
                 start = i - ((maxLen - 1) / 2);
