@@ -1,0 +1,25 @@
+// Last updated: 8/12/2026, 11:09:36 AM
+class Solution {
+    public int countStudents(int[] students, int[] sandwiches) {
+        Queue<Integer> queue = new LinkedList();
+        for (int i = 0; i < students.length; i++) {
+            queue.offer(students[i]);
+        }
+        int count = 0;
+        int idx = 0;
+        while (!queue.isEmpty()) {
+            if (queue.peek() == sandwiches[idx]) {
+                queue.poll();
+                idx++;
+                count = 0;
+            } else {
+                queue.offer(queue.poll());
+                count++;
+            }
+            if (count == queue.size()) {
+                return count;
+            }
+        }
+        return queue.size();
+    }
+}
