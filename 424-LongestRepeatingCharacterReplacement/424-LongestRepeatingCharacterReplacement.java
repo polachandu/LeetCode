@@ -1,0 +1,21 @@
+// Last updated: 8/12/2026, 11:14:41 AM
+class Solution {
+    public int characterReplacement(String s, int k) {
+        int maxLen = 0, maxFreq = 0;
+        int left = 0;
+        int[] count = new int[26];
+        for (int right = 0; right < s.length(); right++) {
+            count[s.charAt(right) - 'A']++;
+
+            maxFreq = Math.max(maxFreq, count[s.charAt(right) - 'A']);
+            int windowSize = right - left + 1;
+            if (windowSize - maxFreq > k) {
+                count[s.charAt(left) - 'A']--;
+                left++;
+            }
+            maxLen = Math.max(maxLen, right - left + 1);
+        }
+
+        return maxLen;
+    }
+}
